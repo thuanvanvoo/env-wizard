@@ -1,0 +1,53 @@
+#!/bin/sh
+# env-wizard launcher (macOS / Linux / WSL; on Windows Git Bash it hands off to env-wizard.ps1).
+# Finds a Python >= 3.9 without installing anything. If none exists it prints a JSON
+# "needs_engine" message (exit 3) so Claude can ask the user before running bin/bootstrap.
+set -u
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+case "$(uname -s 2>/dev/null)" in
+  MINGW*|MSYS*|CYGWIN*)
+    exec powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$ROOT/bin/env-wizard.ps1" "$@" ;;
+esac
+
+if [ "${1:-}" = "healthcheck" ]; then
+  # Fast path: most projects have no env-wizard setup at all -> stay silent, start nothing.
+  P="${CLAUDE_PROJECT_DIR:-$PWD}"
+  if [ ! -f "$P/.env-wizard/state.json" ] && [ ! -f "$P/env-wizard.yaml" ]; then
+    exit 0
+  fi
+fi
+
+ok_python() {
+  [ -n "$1" ] && [ -x "$1" ] || return 1
+  if [ "$(uname -s)" = "Darwin" ] && [ "$1" = "/usr/bin/python3" ]; then
+    # Apple's stub opens an install dialog unless the command line tools are present.
+    xcode-select -p >/dev/null 2>&1 || return 1
+  fi
+  "$1" -c 'import sys; sys.exit(0 if sys.version_info >= (3, 9) else 1)' >/dev/null 2>&1
+}
+
+PY="${ENV_WIZARD_PYTHON:-}"
+if ! ok_python "$PY"; then
+  PY=""
+  for c in python3 python; do
+    cand="$(command -v "$c" 2>/dev/null || true)"
+    if ok_python "$cand"; then PY="$cand"; break; fi
+  done
+fi
+if [ -z "$PY" ]; then
+  UV="$(command -v uv 2>/dev/null || true)"
+  [ -z "$UV" ] && [ -x "$HOME/.local/bin/uv" ] && UV="$HOME/.local/bin/uv"
+  if [ -n "$UV" ]; then
+    cand="$(cd "$HOME" && "$UV" python find '>=3.10' 2>/dev/null | tail -n 1)"
+    if ok_python "$cand"; then PY="$cand"; fi
+  fi
+fi
+if [ -z "$PY" ]; then
+  [ "${1:-}" = "healthcheck" ] && exit 0
+  printf '%s\n' "{\"ok\": false, \"needs_engine\": true, \"bootstrap\": \"$ROOT/bin/bootstrap\", \"download_mb\": 60, \"needs_password\": false, \"message\": \"env-wizard needs its small helper (uv and Python, about 60 MB, no password) before it can look at this computer.\"}"
+  exit 3
+fi
+
+export ENV_WIZARD_ROOT="$ROOT"
+export PYTHONPATH="$ROOT/src${PYTHONPATH:+:$PYTHONPATH}"
+exec "$PY" -I -c 'import sys; sys.path.insert(0, sys.argv.pop(1)); from env_wizard.cli import main; sys.exit(main(sys.argv[1:]))' "$ROOT/src" "$@"

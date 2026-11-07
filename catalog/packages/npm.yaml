@@ -1,0 +1,4 @@
+# Curated npm allow-list (SPEC §5.6). Versions are exact pins, always quoted.
+packages:
+  serve: { version: "14.2.6", summary: "Preview a website on your own computer." }
+  prettier: { version: "3.9.9", summary: "Tidies up code formatting automatically." }

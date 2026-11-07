@@ -1,0 +1,13 @@
+id: vscode
+name: Visual Studio Code
+summary: "A free editor for looking at and changing code and text files."
+category: app
+optional: true
+aliases: [code, vs-code, editor]
+size_mb: 400
+est_minutes: 3
+license_note: "Installing VS Code accepts Microsoft's license terms."
+platform_depends_on: { macos: [homebrew], windows: [winget] }
+platforms:
+  macos: { method: brew-cask, cask: visual-studio-code, app: "Visual Studio Code.app" }
+  windows: { method: winget, package_id: Microsoft.VisualStudioCode, bin: code, scope: user }

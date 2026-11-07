@@ -1,0 +1,14 @@
+id: gh
+name: GitHub CLI
+summary: "Connects to GitHub so Claude can work with your repositories."
+category: cli
+aliases: [github, github-cli]
+size_mb: 40
+est_minutes: 1
+requires_admin: { windows: true }
+depends_on: [git]
+platform_depends_on: { macos: [homebrew], windows: [winget] }
+platforms:
+  macos: { method: brew-formula, formula: gh, bin: gh }
+  windows: { method: winget, package_id: GitHub.cli, bin: gh }
+smoke_test: { kind: command, argv: [gh, --version] }

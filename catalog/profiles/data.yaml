@@ -1,0 +1,15 @@
+id: data
+name: Data & spreadsheets
+summary: "Analyze spreadsheets and CSV files, make charts, and automate reports."
+keywords: [data, excel, spreadsheet, spreadsheets, csv, xlsx, chart, charts, analyze, analysis, report, reports, table, tables, pandas, numbers, graph]
+items: [uv, python, python-env, python-packages, cc-permissions:python, claude-md]
+packages:
+  python: [pandas, openpyxl, matplotlib, jupyterlab]
+try_prompts:
+  - "Open sales.xlsx and tell me the total by region."
+  - "Make a bar chart of the monthly numbers in data.csv and save it as chart.png."
+  - "Find duplicate rows in customers.csv and save a cleaned copy."
+claude_md: |
+  This project has a Python environment for working with spreadsheets and data.
+  - Run Python with `uv run python script.py` (uses the project's .venv).
+  - Available libraries: pandas, openpyxl (Excel), matplotlib (charts), jupyterlab.

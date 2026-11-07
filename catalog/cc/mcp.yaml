@@ -1,0 +1,8 @@
+# MCP servers that may be added to a project's .mcp.json. Exact versions only.
+servers:
+  filesystem:
+    name: "File access (MCP)"
+    summary: "Lets Claude read and write files in this folder through a standard connector."
+    depends_on: [node]
+    command: npx
+    args: ["-y", "@modelcontextprotocol/server-filesystem@2026.8.31", "."]

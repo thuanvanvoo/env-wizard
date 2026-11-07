@@ -1,0 +1,13 @@
+id: python-env
+name: Project Python environment
+summary: "A private space for this project's Python tools, so different projects never conflict."
+category: project
+aliases: [venv, virtualenv]
+scope: project
+depends_on: [python]
+size_mb: 30
+est_minutes: 1
+platforms:
+  macos: { method: uv-venv }
+  windows: { method: uv-venv }
+  linux: { method: uv-venv }

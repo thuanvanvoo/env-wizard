@@ -1,0 +1,15 @@
+# Claude Code permission presets merged into the project's .claude/settings.json (allow list only).
+presets:
+  python:
+    - "Bash(uv run:*)"
+    - "Bash(uv pip list:*)"
+    - "Bash(.venv/bin/python:*)"
+  node:
+    - "Bash(npm run:*)"
+    - "Bash(npx serve:*)"
+  docs:
+    - "Bash(pandoc:*)"
+  git:
+    - "Bash(git status:*)"
+    - "Bash(git diff:*)"
+    - "Bash(git log:*)"

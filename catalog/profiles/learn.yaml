@@ -1,0 +1,13 @@
+id: learn
+name: Learn to code
+summary: "Everything a beginner needs to learn Python and JavaScript with Claude as a tutor."
+keywords: [learn, learning, beginner, student, course, tutorial, teach, study, programming, coding, code]
+items: [git, uv, python, python-env, node, vscode, template:learn-python, cc-permissions:python, cc-permissions:git, claude-md]
+try_prompts:
+  - "Explain hello.py line by line, then help me change it to greet me by name."
+  - "Give me a small exercise about loops and check my answer."
+  - "Teach me what Git does by saving a version of my first program."
+claude_md: |
+  The user is learning to code. Explain concepts simply, give small exercises, and let them type the code.
+  - Run Python with `uv run python hello.py`. Node.js is also installed (`node file.js`).
+  - Git is installed; teach it gradually.

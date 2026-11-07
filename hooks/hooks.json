@@ -1,0 +1,17 @@
+{
+  "description": "Quick, silent check that this project's tools still work. Speaks up only when something is broken.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${CLAUDE_PLUGIN_ROOT}/bin/env-wizard\" healthcheck --hook",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

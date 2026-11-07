@@ -1,0 +1,11 @@
+id: uv
+name: uv
+summary: "A small, fast helper that installs Python and keeps each project's Python tools separate."
+category: manager
+default_version: "0.12.23"
+size_mb: 40
+est_minutes: 1
+platforms:
+  macos: { method: uv-standalone }
+  windows: { method: uv-standalone }
+  linux: { method: uv-standalone }

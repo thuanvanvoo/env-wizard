@@ -1,0 +1,7 @@
+{
+  "name": "env-wizard",
+  "version": "0.1.0",
+  "description": "Sets up the tools, languages and libraries your project needs, explained in plain language, for people who have never installed developer tools.",
+  "license": "MIT",
+  "keywords": ["setup", "environment", "onboarding", "python", "node", "beginner", "non-technical"]
+}

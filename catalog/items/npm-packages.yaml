@@ -1,0 +1,11 @@
+id: npm-packages
+name: JavaScript libraries
+summary: "Ready-made JavaScript building blocks for this project."
+category: package
+scope: project
+depends_on: [node]
+est_minutes: 2
+platforms:
+  macos: { method: npm-packages }
+  windows: { method: npm-packages }
+  linux: { method: npm-packages }

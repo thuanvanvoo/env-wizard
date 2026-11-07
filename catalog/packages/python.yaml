@@ -1,0 +1,9 @@
+# Curated Python allow-list (SPEC §5.6). Versions are exact pins, always quoted.
+packages:
+  pandas: { version: "3.0.6", summary: "Read, clean and summarize tables like spreadsheets.", import: pandas }
+  openpyxl: { version: "3.1.5", summary: "Read and write Excel (.xlsx) files.", import: openpyxl }
+  matplotlib: { version: "3.11.2", summary: "Make charts and graphs.", import: matplotlib }
+  jupyterlab: { version: "4.5.11", summary: "Notebooks that mix notes, code and charts.", import: jupyterlab }
+  python-docx: { version: "1.2.0", summary: "Read and write Word (.docx) documents.", import: docx }
+  pypdf: { version: "6.19.0", summary: "Read, split and merge PDF files.", import: pypdf }
+  requests: { version: "2.34.2", summary: "Download data from websites and online services.", import: requests }

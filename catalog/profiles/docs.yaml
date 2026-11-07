@@ -1,0 +1,16 @@
+id: docs
+name: Documents & automation
+summary: "Convert, combine and generate Word, PDF and Markdown documents; automate repetitive file tasks."
+keywords: [document, documents, word, docx, pdf, pdfs, markdown, convert, merge, automate, automation, files, rename, letters, invoices]
+items: [uv, python, python-env, python-packages, pandoc, cc-permissions:python, cc-permissions:docs, claude-md]
+packages:
+  python: [python-docx, pypdf, openpyxl, requests]
+try_prompts:
+  - "Combine all the PDFs in this folder into one file called combined.pdf."
+  - "Convert notes.md into a Word document."
+  - "Rename every file in photos/ to include its date."
+claude_md: |
+  This project has tools for documents and automation.
+  - Run Python with `uv run python script.py`.
+  - Libraries: python-docx (Word), pypdf (PDF), openpyxl (Excel), requests (web).
+  - `pandoc` converts between document formats (e.g. `pandoc notes.md -o notes.docx`).

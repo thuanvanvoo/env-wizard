@@ -1,0 +1,9 @@
+id: claude-md
+name: Project notes for Claude (CLAUDE.md)
+summary: "Writes a short note describing this setup so Claude knows how to use it in future sessions."
+category: cc-config
+scope: project
+platforms:
+  macos: { method: claude-md }
+  windows: { method: claude-md }
+  linux: { method: claude-md }

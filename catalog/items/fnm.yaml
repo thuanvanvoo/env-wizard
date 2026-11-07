@@ -1,0 +1,12 @@
+id: fnm
+name: fnm (Node version manager)
+summary: "Installs Node.js and lets each project use the version it needs."
+category: manager
+size_mb: 10
+est_minutes: 1
+shell_init: fnm
+platforms:
+  macos: { method: brew-formula, formula: fnm, bin: fnm }
+  windows: { method: winget, package_id: Schniz.fnm, bin: fnm, scope: user }
+  linux: { method: fnm-script }
+platform_depends_on: { macos: [homebrew], windows: [winget] }

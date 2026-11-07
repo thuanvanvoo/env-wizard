@@ -1,0 +1,9 @@
+id: winget
+name: Windows Package Manager (winget)
+summary: "Windows' built-in app installer. env-wizard uses it to install other tools."
+category: manager
+platforms:
+  windows:
+    method: check-only
+    bin: winget
+    instructions: "Open the Microsoft Store, search for \"App Installer\", and click Update (or Get). Then say done."

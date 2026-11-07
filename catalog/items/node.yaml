@@ -1,0 +1,15 @@
+id: node
+name: Node.js
+summary: "Runs JavaScript outside the browser. Needed for building websites and many tools."
+category: runtime
+aliases: [nodejs, npm, javascript]
+default_version: "24"
+allowed_versions: ">=18"
+depends_on: [fnm]
+size_mb: 90
+est_minutes: 2
+platforms:
+  macos: { method: fnm-node }
+  windows: { method: fnm-node }
+  linux: { method: fnm-node }
+smoke_test: { kind: node, code: "console.log('hello from Node')" }

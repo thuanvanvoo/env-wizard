@@ -1,0 +1,11 @@
+id: project-python
+name: This project's Python requirements
+summary: "Installs exactly the Python libraries this project lists in its own files."
+category: project
+scope: project
+depends_on: [python-env]
+est_minutes: 3
+platforms:
+  macos: { method: project-python-deps }
+  windows: { method: project-python-deps }
+  linux: { method: project-python-deps }

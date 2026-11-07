@@ -1,0 +1,15 @@
+id: web
+name: Websites
+summary: "Build a simple website and preview it on your computer."
+keywords: [website, websites, web, site, html, page, pages, landing, portfolio, blog, javascript, react, frontend]
+items: [node, npm-packages, git, template:web-static, cc-permissions:node, claude-md]
+packages:
+  npm: [serve]
+try_prompts:
+  - "Change the homepage title to my business name and preview it."
+  - "Add an About page with a short bio and a photo placeholder."
+  - "Make the site look good on phones."
+claude_md: |
+  This project is a simple website.
+  - Preview it with `npx serve .` and open the address it prints.
+  - Pages are plain HTML/CSS files in this folder.

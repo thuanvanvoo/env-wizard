@@ -1,0 +1,15 @@
+id: python
+name: Python
+summary: "The programming language most data and automation scripts use."
+category: runtime
+aliases: [python3, py]
+default_version: "3.13"
+allowed_versions: ">=3.10,<3.15"
+depends_on: [uv]
+size_mb: 60
+est_minutes: 2
+platforms:
+  macos: { method: uv-python }
+  windows: { method: uv-python }
+  linux: { method: uv-python }
+smoke_test: { kind: python, code: "print('hello from Python')" }

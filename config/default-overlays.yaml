@@ -1,0 +1,8 @@
+# Organizations that host env-wizard in their own marketplace can list catalog overlays here.
+# Users still see and approve each overlay (source + commit) before it is used. See SPEC §5.5.
+#
+# overlays:
+#   - name: acme
+#     source: https://github.com/acme/env-wizard-catalog.git
+#     description: "ACME's internal tools and onboarding profiles"
+overlays: []

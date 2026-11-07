@@ -1,0 +1,11 @@
+id: project-node
+name: This project's JavaScript requirements
+summary: "Installs exactly the JavaScript libraries this project lists in its own files."
+category: project
+scope: project
+depends_on: [node]
+est_minutes: 3
+platforms:
+  macos: { method: project-node-deps }
+  windows: { method: project-node-deps }
+  linux: { method: project-node-deps }

@@ -1,0 +1,47 @@
+#!/bin/sh
+# Installs env-wizard's engine prerequisites in user space (no password): uv, then a Python.
+# Run ONLY after the user agreed. Records what it installed so /env-wizard undo can remove it.
+set -eu
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+UV_VERSION="${ENV_WIZARD_UV_VERSION:-0.12.23}"
+PY_VERSION="${ENV_WIZARD_PY_VERSION:-3.13}"
+EW_HOME="${ENV_WIZARD_HOME:-$HOME/.env-wizard}"
+mkdir -p "$EW_HOME"
+BIN="$HOME/.local/bin"
+LOG="$EW_HOME/logs/bootstrap.log"; mkdir -p "$(dirname "$LOG")"
+
+had_uv=0
+UV="$(command -v uv 2>/dev/null || true)"
+[ -z "$UV" ] && [ -x "$BIN/uv" ] && UV="$BIN/uv"
+if [ -n "$UV" ]; then
+  had_uv=1
+else
+  echo "Downloading uv $UV_VERSION..." >&2
+  if ! curl -LsSf "https://astral.sh/uv/$UV_VERSION/install.sh" | UV_NO_MODIFY_PATH=1 sh >>"$LOG" 2>&1; then
+    echo '{"ok": false, "error": "Could not download uv. Check the internet connection and try again.", "log": "'"$LOG"'"}'
+    exit 1
+  fi
+  UV="$BIN/uv"
+fi
+
+had_py=0
+if (cd "$HOME" && "$UV" python find "$PY_VERSION" >/dev/null 2>&1); then
+  had_py=1
+else
+  echo "Downloading Python $PY_VERSION..." >&2
+  if ! (cd "$HOME" && "$UV" python install "$PY_VERSION" >>"$LOG" 2>&1); then
+    echo '{"ok": false, "error": "Could not download Python. Check the internet connection and try again.", "log": "'"$LOG"'"}'
+    exit 1
+  fi
+fi
+
+items=""
+if [ "$had_uv" = 0 ]; then
+  items="\"uv\": {\"version\": \"$UV_VERSION\", \"method\": \"uv-standalone\", \"paths_created\": [\"$BIN/uv\", \"$BIN/uvx\"], \"needs_path_block\": true}"
+fi
+if [ "$had_py" = 0 ]; then
+  [ -n "$items" ] && items="$items, "
+  items="$items\"python\": {\"version\": \"$PY_VERSION\", \"method\": \"uv-python\", \"details\": {\"uv_request\": \"$PY_VERSION\"}}"
+fi
+printf '{"items": {%s}, "imported": false}\n' "$items" > "$EW_HOME/bootstrap.json"
+echo '{"ok": true, "message": "env-wizard is ready."}'

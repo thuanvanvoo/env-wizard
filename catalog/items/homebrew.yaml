@@ -1,0 +1,10 @@
+id: homebrew
+name: Homebrew
+summary: "The standard app installer for Mac developer tools. env-wizard uses it to install other tools."
+category: manager
+aliases: [brew]
+size_mb: 400
+est_minutes: 10
+requires_admin: { macos: true }
+platforms:
+  macos: { method: handoff-check, bin: brew, recipe: homebrew }

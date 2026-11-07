@@ -1,0 +1,11 @@
+id: python-packages
+name: Python libraries
+summary: "Ready-made Python building blocks for this project."
+category: package
+scope: project
+depends_on: [python-env]
+est_minutes: 2
+platforms:
+  macos: { method: python-packages }
+  windows: { method: python-packages }
+  linux: { method: python-packages }

@@ -1,0 +1,11 @@
+id: pandoc
+name: Pandoc
+summary: "Converts documents between formats, like Word, PDF, Markdown and web pages."
+category: cli
+size_mb: 150
+est_minutes: 2
+platform_depends_on: { macos: [homebrew], windows: [winget] }
+platforms:
+  macos: { method: brew-formula, formula: pandoc, bin: pandoc }
+  windows: { method: winget, package_id: JohnMacFarlane.Pandoc, bin: pandoc, scope: user }
+smoke_test: { kind: command, argv: [pandoc, --version] }

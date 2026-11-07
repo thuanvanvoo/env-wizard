@@ -1,0 +1,12 @@
+id: git
+name: Git
+summary: "Keeps a history of your files so you can undo changes and share work."
+category: cli
+size_mb: 50
+est_minutes: 2
+requires_admin: { windows: true }
+platform_depends_on: { macos: [homebrew], windows: [winget] }
+platforms:
+  macos: { method: brew-formula, formula: git, bin: git }
+  windows: { method: winget, package_id: Git.Git, bin: git }
+smoke_test: { kind: command, argv: [git, --version] }
